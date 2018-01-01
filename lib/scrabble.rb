@@ -1,13 +1,5 @@
 class Scrabble
 
-  def score(word)
-    if word == ''
-      0
-    else
-      word.each_char.map { |char| point_values[char.upcase] }.reduce(&:+)
-    end
-  end
-
   def point_values
     {
       "A"=>1, "B"=>3, "C"=>3, "D"=>2,
@@ -18,6 +10,14 @@ class Scrabble
       "U"=>1, "V"=>4, "W"=>4, "X"=>8,
       "Y"=>4, "Z"=>10
     }
+  end
+
+  def score(word)
+    if word == ''
+      0
+    else
+      word.each_char.map { |char| point_values[char.upcase] }.reduce(&:+)
+    end
   end
 
   def score_with_multipliers(word, multipliers, additional_multi = 1)
