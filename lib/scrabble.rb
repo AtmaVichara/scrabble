@@ -23,16 +23,10 @@ class Scrabble
   end
 
   def score_with_multipliers(word, multipliers, additional_multi = 1)
-    result = []
-    multipliers.length.times do |i|
-      result << (point_values[word[i].upcase] * multipliers[i])
-    end
-    if word.length > 6
-      ((result.reduce(&:+)) + 10) * additional_multi
-    else
-      (result.reduce(&:+)) * additional_multi
-    end
+    result = word.each_char.with_index.map do |char, index|
+      (point_values[char.upcase] * multipliers[index])
+    end.reduce(&:+)
+    word.length > 6 ? (result + 10) * additional_multi : result * additional_multi
   end
-
 
 end
