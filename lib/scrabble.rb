@@ -1,7 +1,13 @@
 class Scrabble
 
   def score(word)
-    1
+    if word.class == Integer || !!(word =~ /\A[-+]?[0-9]+\z/)
+      "Invalid Response"
+    elsif word == ''
+      0
+    else
+      word.each_char.map { |char| point_values[char.upcase] }.reduce(&:+)
+    end
   end
 
   def point_values
@@ -15,4 +21,18 @@ class Scrabble
       "Y"=>4, "Z"=>10
     }
   end
+
+  def score_with_multipliers(word, multipliers, additional_multi = 1)
+    result = []
+    multipliers.length.times do |i|
+      result << (point_values[word[i].upcase] * multipliers[i])
+    end
+    if word.length > 6
+      ((result.reduce(&:+)) + 10) * additional_multi
+    else
+      (result.reduce(&:+)) * additional_multi
+    end
+  end
+
+
 end
