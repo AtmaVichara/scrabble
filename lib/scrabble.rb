@@ -1,9 +1,7 @@
 class Scrabble
 
   def score(word)
-    if word.class == Integer || !!(word =~ /\A[-+]?[0-9]+\z/)
-      "Invalid Response"
-    elsif word == ''
+    if word == ''
       0
     else
       word.each_char.map { |char| point_values[char.upcase] }.reduce(&:+)

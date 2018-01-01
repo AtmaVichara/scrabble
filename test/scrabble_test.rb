@@ -17,12 +17,6 @@ class ScrabbleTest < Minitest::Test
     assert_equal 9, Scrabble.new.score("forest")
   end
 
-  def test_it_raises_typeerror_if_given_integer_or_number_string
-
-    assert_equal "Invalid Response", Scrabble.new.score('1')
-    assert_equal "Invalid Response", Scrabble.new.score(2)
-  end
-
   def test_it_returns_zero_if_nil
     assert_equal 0, Scrabble.new.score('')
   end
